@@ -1,0 +1,44 @@
+{
+  "name": "outthere",
+  "version": "0.0.1",
+  "description": "app to find outdoor activities near you",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/br-ndt/outThere.git"
+  },
+  "keywords": [
+    "outdoors",
+    "react",
+    "webpack"
+  ],
+  "author": "Tyler Brandt",
+  "license": "GPL-1.0-or-later",
+  "bugs": {
+    "url": "https://github.com/br-ndt/outThere/issues"
+  },
+  "homepage": "https://github.com/br-ndt/outThere#readme",
+  "packageManager": "yarn@3.1.1",
+  "dependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.6.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.69.1",
+    "webpack-server": "^0.1.2"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  }
+}

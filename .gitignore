@@ -115,3 +115,8 @@ dist
 
 # macOS
 **./DS_Store
+
+# project specific
+## logo
+logo_for_svg.png
+*.psd

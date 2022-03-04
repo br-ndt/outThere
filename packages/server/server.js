@@ -1,11 +1,26 @@
 import express from 'express';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fetchWeather from './fetchWeather.js'
 
-const app = express();
-const port = process.env.PORT || 8000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+const env = dotenv.config({
+    path: path.join(__dirname, '../../.env')
+}).parsed;
+const api = express();
+const port = env.APP_SERVER_PORT || 8000;
 
-app.get('/', (req, res) =>
+api.listen(port, () => console.log(`Listening on port ${port}!`));
+
+api.get('/', (req, res) =>
 {
     res.status(200).send({ express: 'Hi I am the API' });
+});
+
+api.get('/weather', async (req, res) =>
+{
+    res.status(200).send(await fetchWeather(env.APP_WEATHER_API_KEY));
 });

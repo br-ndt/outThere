@@ -1,8 +1,8 @@
 import express from 'express';
+import fetchWeather from './fetchWeather.js'
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import fetchWeather from './fetchWeather.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,17 +10,22 @@ const __dirname = path.dirname(__filename);
 const env = dotenv.config({
     path: path.join(__dirname, '../../.env')
 }).parsed;
+
 const api = express();
 const port = env.APP_SERVER_PORT || 8000;
 
 api.listen(port, () => console.log(`Listening on port ${port}!`));
 
-api.get('/', (req, res) =>
+api.get('/api', (req, res) =>
 {
-    res.status(200).send({ express: 'Hi I am the API' });
+    res.status(200).send({ express: 'The API says hello' });
 });
 
-api.get('/weather', async (req, res) =>
+api.post('/weather', async (req, res) =>
 {
-    res.status(200).send(await fetchWeather(env.APP_WEATHER_API_KEY));
+    if(req.body === null || req.body === undefined)
+    {
+        req.body = {lat: -2000, lon: -2000}
+    }
+    res.status(200).send(await fetchWeather(env.APP_WEATHER_API_KEY, req.body.lat, req.body.lon));
 });

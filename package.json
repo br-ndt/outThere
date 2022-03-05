@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "app to find outdoor activities near you",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "test",
     "start": "yarn workspaces foreach -pi run dev"
@@ -27,9 +28,6 @@
     "packages": [
       "packages/*"
     ]
-  },
-  "devDependencies": {
-    "dotenv": "^16.0.0"
   },
   "dependencies": {
     "node-fetch": "^3.2.1"

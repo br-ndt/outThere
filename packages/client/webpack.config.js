@@ -5,8 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const env = dotenv.config({
     path: path.join(__dirname, '../../.env')
-});
-
+}).parsed;
 
 module.exports = {
     mode: 'development',
@@ -16,6 +15,16 @@ module.exports = {
     //     path: path.resolve(__dirname, 'public'),
     //     filename: 'build.js'
     // },
+    devServer: {
+        proxy: {
+            '/api' : {
+                target: `http://localhost:${env.APP_SERVER_PORT}`,
+            },
+            '/weather' : {
+                target: `http://localhost:${env.APP_SERVER_PORT}`,
+            },
+        },
+    },
     module: {
         rules: [
             {

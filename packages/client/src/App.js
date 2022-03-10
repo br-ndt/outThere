@@ -1,75 +1,78 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
-import WeatherButton from './Containers/weatherButton.js';
+import TodayWeather from './Containers/todayWeather.js';
+import WeeklyWeather from './Containers/weeklyWeather.js';
 
 const App = () =>
 {
-    const [testData, setTestData] = useState(null);
     const [weather, setWeather] = useState({});
-
-    const callBackendAPI = async () =>
-    {
-        const response = await fetch(`/api`);
-        const body = await response.json();
-
-        if(response.status !== 200)
-        {
-            throw Error(body.message);
-        }
-        return body;
-    }
 
     const getWeather = async (lat, lon) =>
     {
+        let data = {
+            lat,
+            lon
+        }
+        console.log('calling getWeather with: ' + data.lat + ', ' + data.lon);
+        console.log(JSON.stringify(data));
         await fetch(`/weather`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: {
-                'lat': lat,
-                'lon': lon
-            }
+            body: JSON.stringify(data),
         })
         .then(response => response.json())
         .then((json) =>
         {
-            console.log(Object.keys(json));
+            console.log(json);
             setWeather(json);
         })
         .catch((error) =>
         {
-            console.log(`Sorry, unable to fetch because ${error}`)
+            console.log(`Sorry, unable to fetch from API because ${error}`)
         });
     }
 
-    const displayTestData = () =>
-    {
-        if(testData !== null)
-        {
-            return testData;
-        }
-        else
-        {
-            return { data: "no response" };
-        }
-    }
+    // const displayTestData = () =>
+    // {
+    //     if(testData !== null)
+    //     {
+    //         return testData;
+    //     }
+    //     else
+    //     {
+    //         return { data: "no response" };
+    //     }
+    // }
 
     const weatherInfo = () =>
     {
         if(Object.keys(weather).length > 0)
         {
-            console.log(weather);
+            return(
+                <>
+                    <TodayWeather
+                    current={weather.current}
+                    hourly={weather.hourly}/>
+                    <WeeklyWeather
+                    daily={weather.daily}/>
+                </>
+            )
         }
-        else return
+        else return null;
     }
 
     useEffect(() =>
     {
-        callBackendAPI()
-            .then(res => setTestData({ data: res.express }))
-            .catch(err => console.log(err));
+        if('geolocation' in navigator)
+        {
+            navigator.geolocation.getCurrentPosition((position) =>
+            {
+                getWeather(position.coords.latitude, position.coords.longitude);
+            })
+        }
     },[]);
 
     return(
@@ -78,11 +81,6 @@ const App = () =>
                 <img src={logo} className="App-logo" alt="logo"/>
                 <h1 className="App-title">outThere</h1>
             </header>
-
-            <p className="App-intro">{displayTestData().data}</p>
-            <WeatherButton
-                onClick={getWeather}
-            />
             {weatherInfo()}
         </div>
     )

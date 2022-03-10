@@ -59,7 +59,7 @@ const fetchWeather = async (apiKey, lat = -2000, lon = -2000) =>
         })
         .catch((error) =>
         {
-            console.log(`Sorry, unable to fetch because ${error}`)
+            console.log(`Sorry, unable to fetch weather because ${error}`)
         });
     }
 

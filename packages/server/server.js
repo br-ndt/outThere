@@ -14,6 +14,12 @@ const env = dotenv.config({
 const api = express();
 const port = env.APP_SERVER_PORT || 8000;
 
+// parse application/x-www-form-urlencoded
+api.use(express.urlencoded({ extended: true }));
+
+// parse application/json
+api.use(express.json());
+
 api.listen(port, () => console.log(`Listening on port ${port}!`));
 
 api.get('/api', (req, res) =>
@@ -23,9 +29,13 @@ api.get('/api', (req, res) =>
 
 api.post('/weather', async (req, res) =>
 {
-    if(req.body === null || req.body === undefined)
+    console.log(req.body);
+    if(req.body)
     {
-        req.body = {lat: -2000, lon: -2000}
+        res.status(200).send(await fetchWeather(env.APP_WEATHER_API_KEY, req.body.lat, req.body.lon));
     }
-    res.status(200).send(await fetchWeather(env.APP_WEATHER_API_KEY, req.body.lat, req.body.lon));
+    else
+    {
+        res.status(504);
+    }
 });

@@ -29,13 +29,12 @@ api.get('/api', (req, res) =>
 
 api.post('/weather', async (req, res) =>
 {
-    console.log(req.body);
     if(req.body)
     {
         res.status(200).send(await fetchWeather(env.APP_WEATHER_API_KEY, req.body.lat, req.body.lon));
     }
     else
     {
-        res.status(504);
+        res.status(400);
     }
 });

@@ -54,7 +54,6 @@ const fetchWeather = async (apiKey, lat = -2000, lon = -2000) =>
         .then(response => response.json())
         .then((json) =>
         {
-            console.log(Object.keys(json));
             weather = json;
         })
         .catch((error) =>

@@ -1,17 +1,14 @@
 import React from 'react';
 
-const dayOfWeek = (props) =>
-{
+const dayOfWeek = (props) => {
     const DATEOPTIONS = { dateStyle: 'full' };
 
-    const getDate = () =>
-    {
+    const getDate = () => {
         const DATE = new Date(props.data.dt * 1000);
         return new Intl.DateTimeFormat('en-US', DATEOPTIONS).format(DATE)
     }
 
-    if(props.data)
-    {
+    if(props.data) {
         let date = getDate();
         return(
             <li className="weekDay dailyWeather">
@@ -24,8 +21,7 @@ const dayOfWeek = (props) =>
             </li>
         );
     }
-    else
-    {
+    else {
         return null;
     }
 }

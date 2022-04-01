@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "test",
+    "test": "jest",
     "start": "yarn workspaces foreach -pi run dev"
   },
   "repository": {
@@ -23,7 +23,7 @@
     "url": "https://github.com/br-ndt/outThere/issues"
   },
   "homepage": "https://github.com/br-ndt/outThere#readme",
-  "packageManager": "yarn@3.1.1",
+  "packageManager": "yarn@3.2.0",
   "workspaces": {
     "packages": [
       "packages/*"

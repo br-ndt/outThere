@@ -1,7 +1,6 @@
 import React from 'react';
 
-const todayWeather = () =>
-{
+const todayWeather = () => {
     return null;
 }
 

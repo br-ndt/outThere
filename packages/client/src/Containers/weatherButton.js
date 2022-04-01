@@ -1,7 +1,6 @@
 import React from 'react';
 
-const weatherButton = (props) =>
-{
+const weatherButton = (props) => {
     return(
         <>
             <input type='number' max={90} min={-90} id="latitude"></input>

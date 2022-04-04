@@ -17,4 +17,4 @@ then create a .env file in the project directory with the value
 then
 ```yarn start```
 
-visit localhost:8000/weather to get weather for a hardcoded location
+visit localhost:8000/weather to get weather for your location (if you agree to share your location with your browser)

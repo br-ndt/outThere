@@ -1,6 +1,6 @@
 import React from "react";
 
-const weatherButton = (props) => {
+const WeatherButton = (props) => {
   return (
     <>
       <input type="number" max={90} min={-90} id="latitude"></input>
@@ -23,4 +23,4 @@ const weatherButton = (props) => {
   );
 };
 
-export default weatherButton;
+export default WeatherButton;

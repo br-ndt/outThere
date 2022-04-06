@@ -10,11 +10,11 @@ const env = dotenv.config({
 module.exports = {
   mode: "development",
   entry: "./src/index.js",
-  // output:
-  // {
-  //     path: path.resolve(__dirname, 'public'),
-  //     filename: 'build.js'
-  // },
+  output:
+  {
+      path: path.resolve(__dirname, 'public'),
+      filename: 'build.js'
+  },
   devServer: {
     proxy: {
       "/api": {

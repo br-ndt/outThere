@@ -3,7 +3,11 @@
     max-width: 100px;
 }
 
-ul.weeklyWeather
+.App-header, .currentWeather {
+    display: inline-block;
+}
+
+ul.weeklyWeather, ul.todayWeather
 {
     display: flex;
     list-style: none;
@@ -11,7 +15,7 @@ ul.weeklyWeather
     justify-content: space-between;
 }
 
-li.weekDay.dailyWeather
+li.weekDay.dailyWeather, .currentWeather
 {
     background-color: rgba(1,1,1,0.2);
     text-align: center;

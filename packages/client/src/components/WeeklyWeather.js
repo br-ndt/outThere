@@ -1,7 +1,7 @@
 import React from "react";
 import DayOfWeek from "./DayOfWeek.js";
 
-const weeklyWeather = (props) => {
+const WeeklyWeather = (props) => {
   const constructWeek = () => {
     const week = [];
     for (let i = 0; i < 7; ++i) {
@@ -13,4 +13,4 @@ const weeklyWeather = (props) => {
   return <ul className="weeklyWeather">{constructWeek()}</ul>;
 };
 
-export default weeklyWeather;
+export default WeeklyWeather;

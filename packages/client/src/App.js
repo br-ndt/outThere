@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import AppHeader from "./components/AppHeader.js";
+import CurrentWeather from "./components/CurrentWeather.js";
 import TodayWeather from "./components/TodayWeather.js";
 import WeeklyWeather from "./components/WeeklyWeather.js";
 import getWeather from "./helpers/getWeather.js";
-import AppHeader from "./components/AppHeader.js";
 
 const App = () => {
   const [weather, setWeather] = useState({});
@@ -23,7 +24,8 @@ const App = () => {
     if (Object.keys(weather).length > 0) {
       return (
         <>
-          <TodayWeather current={weather.current} hourly={weather.hourly} />
+          <CurrentWeather current={weather.current} today={weather.daily[0]} />
+          <TodayWeather hourly={weather.hourly} />
           <WeeklyWeather daily={weather.daily} />
         </>
       );

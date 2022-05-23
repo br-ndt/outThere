@@ -12,18 +12,20 @@ module.exports = {
   entry: "./src/index.js",
   output:
   {
-      path: path.resolve(__dirname, 'public'),
-      filename: 'build.js'
+    publicPath: '/',
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
   },
   devServer: {
-    proxy: {
-      "/api": {
-        target: `http://localhost:${env.APP_SERVER_PORT}`,
-      },
-      "/weather": {
-        target: `http://localhost:${env.APP_SERVER_PORT}`,
-      },
-    },
+    port: 8080,
+    static: '/dist/',
+    proxy: [
+      {
+        context: ['/', '/today', '/api'],
+        target: 'http://localhost:8000',
+      }
+    ],
+    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -39,8 +41,12 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        test: /\.css$/i,
+        include: path.resolve(__dirname, 'src'),
+        use: [
+          "style-loader",
+          "css-loader",
+        ],
       },
       {
         test: /\.svg$/,
@@ -60,7 +66,7 @@ module.exports = {
       template: "./public/index.html",
     }),
     new webpack.DefinePlugin({
-      "process.env": env.parsed,
+      "process.env": env,
     }),
   ],
 };

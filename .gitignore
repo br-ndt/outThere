@@ -114,6 +114,8 @@ dist
 !.yarn/versions
 
 # macOS
+.DS_Store
+packages/client/.DS_Store
 **./DS_Store
 
 # project specific

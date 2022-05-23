@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "start": "yarn workspaces foreach -pi run dev"
+    "start": "NODE_ENV='dev' yarn workspaces foreach -pi run dev"
   },
   "repository": {
     "type": "git",

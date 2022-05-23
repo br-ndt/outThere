@@ -95,7 +95,7 @@ li.weekDay.dailyWeather, .currentWeather, .todayWeather li {
     padding: 10px;
 }
 
-.currentWeather, ul.weeklyWeather {
+.currentWeather {
     margin: 0 10px;
 }
 
@@ -103,13 +103,13 @@ li.weekDay.dailyWeather, .currentWeather, .todayWeather li {
     display: inline-block;
 }
 
-ul.todayWeather {
+ul.todayWeather, ul.weeklyWeather {
     white-space: nowrap;
     overflow-x: scroll;
     margin: -10px 0;
 }
 
-.todayWeather li {
+.todayWeather li, li.weekDay {
     margin: 10px;
     display: inline;
     overflow-y: visible;

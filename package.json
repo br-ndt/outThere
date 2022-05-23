@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "start": "NODE_ENV='dev' yarn workspaces foreach -pi run dev"
+    "dev": "NODE_ENV='development' yarn workspaces foreach -pi run dev",
+    "start": "NODE_ENV='production' yarn workspace client build && NODE_ENV='production' yarn workspace server start"
   },
   "repository": {
     "type": "git",
@@ -23,13 +24,14 @@
     "url": "https://github.com/br-ndt/outThere/issues"
   },
   "homepage": "https://github.com/br-ndt/outThere#readme",
+  "engines": {
+    "yarn": "~3.2.0",
+    "node": "~14.19"
+  },
   "packageManager": "yarn@3.2.0",
   "workspaces": {
     "packages": [
       "packages/*"
     ]
-  },
-  "dependencies": {
-    "node-fetch": "^3.2.1"
   }
 }

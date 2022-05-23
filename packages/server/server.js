@@ -15,7 +15,7 @@ dotenv.config({
 const app = express();
 const port = process.env.APP_SERVER_PORT || 8000;
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "./public")));
 
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));

@@ -1,29 +1,25 @@
 const path = require("path");
-const webpack = require("webpack");
-const dotenv = require("dotenv");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
-const env = dotenv.config({
-  path: path.join(__dirname, "../../.env"),
-}).parsed;
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 
 module.exports = {
-  mode: "development",
-  entry: "./src/index.js",
-  output:
-  {
-    publicPath: '/',
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+  mode: process.env.NODE_ENV,
+  entry: path.join(__dirname, "./src/index.js"),
+  output: {
+    path: path.resolve(__dirname, "../server/public/dist"),
+    publicPath: "/dist/",
+    filename: "bundle.js",
   },
   devServer: {
     port: 8080,
-    static: '/dist/',
+    static: {
+      directory: path.join(__dirname, "public/"),
+    },
     proxy: [
       {
-        context: ['/', '/today', '/api'],
-        target: 'http://localhost:8000',
-      }
+        context: ["/api"],
+        target: "http://localhost:8000",
+      },
     ],
     historyApiFallback: true,
   },
@@ -42,11 +38,8 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        include: path.resolve(__dirname, 'src'),
-        use: [
-          "style-loader",
-          "css-loader",
-        ],
+        include: path.resolve(__dirname, "src"),
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.svg$/,
@@ -63,10 +56,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./public/index.html",
+      template: path.join(__dirname, "public/index.template.html"),
+      favicon: path.join(__dirname, "public/favicon.ico"),
     }),
-    new webpack.DefinePlugin({
-      "process.env": env,
-    }),
+    new WebpackManifestPlugin(),
   ],
 };

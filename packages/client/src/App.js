@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Outlet, Route, Routes } from "react-router-dom";
 import AppHeader from "./components/AppHeader.js";
 import CurrentWeather from "./components/CurrentWeather.js";
@@ -8,15 +8,20 @@ import WeeklyWeather from "./components/WeeklyWeather.js";
 const App = () => {
   const [weather, setWeather] = useState({});
   const hasWeatherData = Object.keys(weather).length;
+  const isMounted = useRef(true);
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
+    if ("geolocation" in navigator && isMounted.current) {
       navigator.geolocation.getCurrentPosition((position) => {
         fetchWeather(
           position.coords.latitude,
           position.coords.longitude
         );
       });
+    }
+
+    return () => {
+      isMounted.current = false;
     }
   }, []);
 
@@ -26,20 +31,22 @@ const App = () => {
       lon,
     };
     try {
-      const response = await fetch(`/api/v1/weather`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      if(!response.ok) {
-        throw new Error(`${response.status} (${response.statusText})`);
+      if(!hasWeatherData && isMounted.current) {
+        const response = await fetch(`/api/v1/weather`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        if(!response.ok) {
+          throw new Error(`${response.status} (${response.statusText})`);
+        }
+        const json = await response.json();
+        console.log("Weather was successfully fetched from API.");
+        if(isMounted.current) setWeather(json);
       }
-      const json = await response.json();
-      console.log("Weather was successfully fetched from API.");
-      setWeather(json);
     } catch (error) {
       console.log(`Sorry, unable to fetch from API because ${error}`);
     }
@@ -73,6 +80,9 @@ const App = () => {
           <Route path='/' element={currentWeather}/>
           <Route path='/today' element={todayWeather}/>
           <Route path='/week' element={weeklyWeather}/>
+          <Route path="*" element={
+            <h2>404: not found</h2>
+          }/>
         </Route>
 
       </Routes>

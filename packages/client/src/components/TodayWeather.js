@@ -6,7 +6,7 @@ const TodayWeather = (props) => {
   const constructDay = () => {
     const day = [];
     for (let i = 0; i < 24; ++i) {
-      day.push(<HourOfDay hour={props.hourly[i]} />)
+      day.push(<HourOfDay hour={props.hourly[i]} key={`hour${i}`}/>)
     }
     return day;
   };

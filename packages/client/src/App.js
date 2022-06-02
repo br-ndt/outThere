@@ -91,15 +91,3 @@ const App = () => {
 };
 
 export default App;
-
-// const displayTestData = () =>
-// {
-//     if(testData !== null)
-//     {
-//         return testData;
-//     }
-//     else
-//     {
-//         return { data: "no response" };
-//     }
-// }

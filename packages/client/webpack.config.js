@@ -1,10 +1,11 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: path.join(__dirname, "./src/index.js"),
+  entry: path.join(__dirname, "./src/index.jsx"),
   output: {
     path: path.resolve(__dirname, "../server/public/dist"),
     publicPath: "/dist/",
@@ -26,7 +27,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: /\.(js|mjs|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -37,9 +38,9 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/i,
+        test: /\.(s(a|c)ss)$/i,
         include: path.resolve(__dirname, "src"),
-        use: ["style-loader", "css-loader"],
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.svg$/,
@@ -54,11 +55,15 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: ["*", ".js", ".jsx"],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public/index.template.html"),
       favicon: path.join(__dirname, "public/favicon.ico"),
     }),
     new WebpackManifestPlugin(),
+    new MiniCssExtractPlugin(),
   ],
 };

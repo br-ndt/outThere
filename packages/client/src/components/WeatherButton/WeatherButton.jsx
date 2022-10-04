@@ -1,8 +1,8 @@
 import React from "react";
 
-const WeatherButton = (props) => {
+export default function WeatherButton({ onClick }) {
   return (
-    <>
+    <section className="weather-button">
       <input type="number" max={90} min={-90} id="latitude"></input>
       <label htmlFor="latitude">
         <p>latitude</p>
@@ -12,15 +12,13 @@ const WeatherButton = (props) => {
         <p>longitude</p>
       </label>
       <button
-        onClick={props.onClick}
+        onClick={onClick}
         id="weather"
         className="weather-button"
       ></button>
       <label htmlFor="weather">
         <p>WEATHER</p>
       </label>
-    </>
+    </section>
   );
-};
-
-export default WeatherButton;
+}

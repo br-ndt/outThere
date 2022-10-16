@@ -1,12 +1,9 @@
-.weatherTile {
+.card {
   backdrop-filter: blur(20px);
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.18);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 30px;
   box-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
-  min-height: 30px;
-  min-width: 150px;
-  max-width: 200px;
   margin: 10px;
   padding: 10px;
   text-align: center;

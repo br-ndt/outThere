@@ -1,13 +1,15 @@
 import React from "react";
 
-import getDate from "../../helpers/getDate";
+import Card from "../Card/Card";
+
+import getDateString from "../../helpers/getDateString";
 
 import styles from "./DayOfWeek.module.scss";
 
 export default function DayOfWeek({ data }) {
-  const date = getDate(data.dt);
+  const date = getDateString(data.dt);
   return (
-    <>
+    <Card>
       {date && (
         <li className={`${styles.weatherTile} ${styles.dayOfWeek}`}>
           <h4>{date.split(",")[0]}</h4>
@@ -20,6 +22,6 @@ export default function DayOfWeek({ data }) {
           <p>{data.weather[0].description}</p>
         </li>
       )}
-    </>
+    </Card>
   );
 }

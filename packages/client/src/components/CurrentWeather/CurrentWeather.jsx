@@ -1,14 +1,16 @@
 import React from "react";
 
-import getDate from "../../helpers/getDate";
+import Card from "../Card/Card";
+
+import getDateString from "../../helpers/getDateString";
 
 import styles from "./CurrentWeather.module.scss";
 
 export default function CurrentWeather({ current, today }) {
-  const date = getDate(current.dt);
+  const date = getDateString(current.dt);
 
   return (
-    <section className={`${styles.weatherTile} ${styles.currentWeather}`}>
+    <Card className={`${styles.currentWeather}`}>
       <h3>
         {date.split(",")[0]},{date.split(",")[1]}, {date.split(" at ")[1]}
       </h3>
@@ -20,6 +22,6 @@ export default function CurrentWeather({ current, today }) {
         src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
       />
       <p>{current.weather[0].description}</p>
-    </section>
+    </Card>
   );
 }

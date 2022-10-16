@@ -1,13 +1,15 @@
 import React from "react";
 
-import getDate from "../../helpers/getDate";
+import Card from "../Card/Card";
+
+import getDateString from "../../helpers/getDateString";
 
 import styles from "./HourOfDay.module.scss";
 
 export default function HourOfDay({ hour }) {
-  const date = getDate(hour.dt);
+  const date = getDateString(hour.dt);
   return (
-    <>
+    <Card>
       {date && (
         <li className={`${styles.weatherTile} ${styles.hourOfDay}`}>
           <p>{Math.round(hour.temp)}°F</p>
@@ -18,6 +20,6 @@ export default function HourOfDay({ hour }) {
           <p>{date.split(" at ")[1]}</p>
         </li>
       )}
-    </>
+    </Card>
   );
 }

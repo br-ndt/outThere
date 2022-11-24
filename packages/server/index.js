@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import path from "path";
+import cors from "cors";
 import { fileURLToPath } from "url";
 
 import rootRouter from "./routes/rootRouter.js";
@@ -13,6 +14,7 @@ dotenv.config({
 });
 
 const app = express();
+app.use(cors());
 const port = process.env.PORT || 8000;
 
 app.use(express.static(path.join(__dirname, "./public")));

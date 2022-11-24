@@ -7,7 +7,7 @@ import getDateString from "../../helpers/getDateString";
 import styles from "./DayOfWeek.module.scss";
 
 export default function DayOfWeek({ data }) {
-  const date = getDateString(data.dt);
+  const date = getDateString(data.dateTime);
   return (
     <Card>
       {date && (

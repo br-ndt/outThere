@@ -7,7 +7,7 @@ import getDateString from "../../helpers/getDateString";
 import styles from "./CurrentWeather.module.scss";
 
 export default function CurrentWeather({ current, today }) {
-  const date = getDateString(current.dt);
+  const date = getDateString(current.dateTime);
 
   return (
     <Card className={`${styles.currentWeather}`}>

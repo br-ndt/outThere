@@ -7,7 +7,7 @@ import getDateString from "../../helpers/getDateString";
 import styles from "./HourOfDay.module.scss";
 
 export default function HourOfDay({ hour }) {
-  const date = getDateString(hour.dt);
+  const date = getDateString(hour.dateTime);
   return (
     <Card>
       {date && (

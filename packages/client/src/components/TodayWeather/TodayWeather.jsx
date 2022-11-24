@@ -7,8 +7,8 @@ import getDateString from "../../helpers/getDateString";
 import styles from "./TodayWeather.module.scss";
 
 export default function TodayWeather({ hourly }) {
-  const data = hourly.slice(0,25).map((hour, i) => {
-    const dateString = getDateString(hour.dt);
+  const data = hourly.slice(0, 25).map((hour, i) => {
+    const dateString = getDateString(hour.dateTime);
     const timeString = dateString.split(" at ")[1];
     return {
       index: i,
@@ -21,8 +21,8 @@ export default function TodayWeather({ hourly }) {
   });
   return (
     <>
-      <Card>
-        <h2>{getDateString(hourly[0].dt).split(" at ")[0]}</h2>
+      <Card className={`${styles.todayWeather}`}>
+        <h2>{getDateString(hourly[0].dateTime).split(" at ")[0]}</h2>
         <LineChart data={data} width={480} height={300} yMin={0} yMax={100} />
       </Card>
     </>

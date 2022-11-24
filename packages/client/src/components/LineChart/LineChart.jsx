@@ -3,13 +3,19 @@ import * as d3 from "d3";
 
 import styles from "./LineChart.module.scss";
 
-export default function LineChart({ data, height, width, yMax, yMin }) {
+export default function LineChart({
+  data,
+  height,
+  width,
+  yMax,
+  yMin,
+  markers,
+}) {
   useEffect(() => {
-    drawChart(data, height, width, yMax, yMin);
+    drawChart(data, height, width, yMax, yMin, markers);
   }, [data]);
 
-  function drawChart(data, height, width, yMn, yMx) {
-    console.log(data);
+  function drawChart(data, height, width, yMn, yMx, markers) {
     d3.select("#line-chart").select("svg").remove();
     d3.select("#line-chart").select(".tooltip").remove();
 
@@ -19,9 +25,11 @@ export default function LineChart({ data, height, width, yMax, yMin }) {
     const xMax = d3.max(data, (d) => d.index);
     const xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, width]);
 
-    const yMin = parseInt(d3.min(data, (d) => d.value)) - 10;
-    const yMax = 100;
-    const yScale = d3.scaleLinear().range([height, yMin]).domain([0, yMax]);
+    const yMin = yMn || parseInt(d3.min(data, (d) => d.value)) - 10;
+    const yScale = d3
+      .scaleLinear()
+      .range([height, yMin])
+      .domain([0, yMx || 100]);
 
     const svg = d3
       .select("#line-chart")
@@ -156,6 +164,19 @@ export default function LineChart({ data, height, width, yMax, yMin }) {
         tooltip.transition().duration(300).style("opacity", 0);
       })
       .on("mousemove", mouseMove);
+
+    markers &&
+      svg
+        .append("g")
+        .selectAll("marker")
+        .data(markers)
+        .enter()
+        .append(circle)
+        .attr("cx", (d) => xScale(d[0]))
+        .attr("cy", (d) => yScale(d[1]))
+        .attr("r", 4)
+        .attr("transform", `translate(${100},${100})`)
+        .style("fill", "#FFFFFF");
 
     function mouseMove(event) {
       const bisect = d3.bisector((d) => d.index).left;

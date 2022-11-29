@@ -1,12 +1,18 @@
 import React from "react";
 
-import { NavBar } from "../";
+import { NavBar } from "..";
+
+import { CityInfo } from "../../types/LocationData";
 
 import logo from "../../logo.svg";
 
 import styles from "./AppHeader.module.scss";
 
-export default function AppHeader() {
+interface AppHeaderProps {
+  city?: CityInfo;
+}
+
+export default function AppHeader({ city }: AppHeaderProps) {
   return (
     <header className={styles.appHeader}>
       <div className={styles.headerContent}>

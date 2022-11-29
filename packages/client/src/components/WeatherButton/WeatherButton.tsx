@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function WeatherButton({ onClick }) {
+interface WeatherButtonProps {
+  onClick: () => void;
+}
+
+export default function WeatherButton({ onClick }: WeatherButtonProps) {
   return (
     <section className="weather-button">
       <input type="number" max={90} min={-90} id="latitude"></input>

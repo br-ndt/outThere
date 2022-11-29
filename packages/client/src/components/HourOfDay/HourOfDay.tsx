@@ -2,12 +2,19 @@ import React from "react";
 
 import Card from "../Card/Card";
 
+import { WeatherGrouping } from "../../types/WeatherData";
+
 import getDateString from "../../helpers/getDateString";
 
 import styles from "./HourOfDay.module.scss";
 
-export default function HourOfDay({ hour }) {
+interface HourOfDayProps {
+  hour: WeatherGrouping;
+}
+
+export default function HourOfDay({ hour }: HourOfDayProps) {
   const date = getDateString(hour.dateTime);
+
   return (
     <Card>
       {date && (

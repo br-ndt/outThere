@@ -1,9 +1,16 @@
 import React from "react";
-import { DayOfWeek } from "../";
+
+import { DayOfWeek } from "..";
+
+import { DailyWeather } from "../../types/weatherData";
 
 import styles from "./WeeklyWeather.module.scss";
 
-export default function WeeklyWeather({ daily }) {
+interface WeeklyWeatherProps {
+  daily: DailyWeather[];
+}
+
+export default function WeeklyWeather({ daily }: WeeklyWeatherProps) {
   return (
     <ul className={`${styles.tileList} ${styles.weeklyWeather}`}>
       {[...Array(7)].map(

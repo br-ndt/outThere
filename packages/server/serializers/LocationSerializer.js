@@ -11,13 +11,13 @@ export default class LocationSerializer {
       weather: {
         current: {
           dateTime: weather.current.dt,
-          feels_like: weather.current.feels_like,
+          feelsLike: weather.current.feels_like,
           temp: weather.current.temp,
           weather: weather.current.weather,
         },
         hourly: weather.hourly.map((hour) => ({
           dateTime: hour.dt,
-          feels_like: hour.feels_like,
+          feelsLike: hour.feels_like,
           temp: hour.temp,
           weather: hour.weather,
         })),

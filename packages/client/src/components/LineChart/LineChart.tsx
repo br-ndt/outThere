@@ -1,7 +1,18 @@
 import React, { useEffect } from "react";
 import * as d3 from "d3";
 
+import { Datum } from "../../types/D3";
+
 import styles from "./LineChart.module.scss";
+
+interface LineChartProps {
+  data: Datum[];
+  height: number;
+  markers?: Datum[];
+  width: number;
+  yMax: number;
+  yMin: number;
+}
 
 export default function LineChart({
   data,
@@ -10,12 +21,19 @@ export default function LineChart({
   yMax,
   yMin,
   markers,
-}) {
+}: LineChartProps) {
   useEffect(() => {
     drawChart(data, height, width, yMax, yMin, markers);
   }, [data]);
 
-  function drawChart(data, height, width, yMn, yMx, markers) {
+  function drawChart(
+    data: Datum[],
+    height: number,
+    width: number,
+    yMn: number,
+    yMx: number,
+    markers: Datum[]
+  ) {
     d3.select("#line-chart").select("svg").remove();
     d3.select("#line-chart").select(".tooltip").remove();
 
@@ -25,7 +43,7 @@ export default function LineChart({
     const xMax = d3.max(data, (d) => d.index);
     const xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, width]);
 
-    const yMin = yMn || parseInt(d3.min(data, (d) => d.value)) - 10;
+    const yMin = yMn || d3.min(data, (d) => d.value) - 10;
     const yScale = d3
       .scaleLinear()
       .range([height, yMin])
@@ -40,7 +58,7 @@ export default function LineChart({
       .attr("transform", `translate(${margin.left},0)`);
 
     const line = d3
-      .line()
+      .line<Datum>()
       .x((d) => xScale(d.index))
       .y((d) => yScale(d.value))
       .curve(d3.curveNatural);
@@ -108,7 +126,7 @@ export default function LineChart({
         d3
           .axisBottom(xScale)
           .ticks(24)
-          .tickFormat((d) => data[d].label)
+          .tickFormat((d: number) => data[d].label)
       )
       .selectAll(".tick text")
       .attr("x", 8)
@@ -171,15 +189,15 @@ export default function LineChart({
         .selectAll("marker")
         .data(markers)
         .enter()
-        .append(circle)
-        .attr("cx", (d) => xScale(d[0]))
-        .attr("cy", (d) => yScale(d[1]))
+        .append("circle")
+        .attr("cx", (d) => xScale(d.index))
+        .attr("cy", (d) => yScale(d.value))
         .attr("r", 4)
         .attr("transform", `translate(${100},${100})`)
         .style("fill", "#FFFFFF");
 
-    function mouseMove(event) {
-      const bisect = d3.bisector((d) => d.index).left;
+    function mouseMove(event: MouseEvent) {
+      const bisect = d3.bisector((d: Datum) => d.index).left;
       const xPos = d3.pointer(event)[0];
       const x0 = bisect(data, xScale.invert(xPos));
       const d0 = data[x0];

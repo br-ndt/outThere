@@ -2,12 +2,19 @@ import React from "react";
 
 import Card from "../Card/Card";
 
+import { DailyWeather } from "../../types/WeatherData";
+
 import getDateString from "../../helpers/getDateString";
 
 import styles from "./DayOfWeek.module.scss";
 
-export default function DayOfWeek({ data }) {
+interface DayOfWeekProps {
+  data: DailyWeather;
+}
+
+export default function DayOfWeek({ data }: DayOfWeekProps) {
   const date = getDateString(data.dateTime);
+
   return (
     <Card>
       {date && (

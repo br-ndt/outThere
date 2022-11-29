@@ -9,11 +9,21 @@ import {
   WeeklyWeather,
 } from "./components";
 
+import { CityInfo } from "./types/LocationData";
+import { OpenWeatherResponse } from "./types/WeatherData";
+
 import styles from "./styles/app.module.scss";
 
+interface LocationData {
+  campgrounds: any[];
+  city: CityInfo;
+  parks: any[];
+  weather: OpenWeatherResponse;
+}
+
 export default function App() {
-  const [locationData, setLocationData] = useState({});
-  const hasLocationData = Object.keys(locationData).length > 0;
+  const [locationData, setLocationData] = useState<LocationData>();
+  const hasLocationData = Boolean(locationData);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -26,7 +36,7 @@ export default function App() {
     }
   }, []);
 
-  const fetchLocationData = async (lat, lon) => {
+  const fetchLocationData = async (lat: number, lon: number) => {
     let coords = {
       lat,
       lon,
@@ -62,15 +72,17 @@ export default function App() {
           path="/"
           element={
             <>
-              <AppHeader city={locationData.city} />
+              <AppHeader city={locationData?.city} />
               <div className={styles.appBody}>
-                <h2 className={styles.cityName}>
-                  {locationData.city &&
-                    `${locationData.city.name}, ${locationData.city.state}`}
-                </h2>
+                {locationData && (
+                  <h2 className={styles.cityName}>
+                    {locationData.city &&
+                      `${locationData.city.name}, ${locationData.city.state}`}
+                  </h2>
+                )}
                 <Outlet />
                 {/* TODO: context instead of prop-drill */}
-                {hasLocationData && (
+                {locationData && (
                   <Nearby
                     campgrounds={locationData.campgrounds}
                     parks={locationData.parks}
@@ -83,7 +95,7 @@ export default function App() {
           <Route
             path="/"
             element={
-              hasLocationData ? (
+              locationData ? (
                 <CurrentWeather
                   current={locationData.weather.current}
                   today={locationData.weather.daily[0]}
@@ -96,7 +108,7 @@ export default function App() {
           <Route
             path="/today"
             element={
-              hasLocationData ? (
+              locationData ? (
                 <TodayWeather hourly={locationData.weather.hourly} />
               ) : (
                 loadMessage
@@ -106,7 +118,7 @@ export default function App() {
           <Route
             path="/week"
             element={
-              hasLocationData ? (
+              locationData ? (
                 <WeeklyWeather daily={locationData.weather.daily} />
               ) : (
                 loadMessage

@@ -1,9 +1,16 @@
 import React from "react";
 import Card from "../Card/Card";
 
-export default function Nearby({ campgrounds, parks }) {
-  console.log(parks);
-  console.log(campgrounds);
+interface NearbyProps {
+  campgrounds: any[];
+  parks: any[];
+}
+
+interface Activity {
+  name: string;
+}
+
+export default function Nearby({ campgrounds, parks }: NearbyProps) {
   return (
     <>
       <h2>Nearby Parks:</h2>
@@ -14,7 +21,7 @@ export default function Nearby({ campgrounds, parks }) {
             <h3>{park.fullName}</h3>
             <p>{park.designation}</p>
             <ul>
-              {park.activities.map((activity) => (
+              {park.activities.map((activity: Activity) => (
                 <li>{activity.name}</li>
               ))}
             </ul>
@@ -31,7 +38,7 @@ export default function Nearby({ campgrounds, parks }) {
             <h3>{campground.name}</h3>
             <p>{campground.designation}</p>
             <ul>
-              {campground.activities?.map((activity) => (
+              {campground.activities?.map((activity: Activity) => (
                 <li>{activity.name}</li>
               ))}
             </ul>

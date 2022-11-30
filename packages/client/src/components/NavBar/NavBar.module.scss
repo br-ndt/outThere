@@ -1,0 +1,21 @@
+.navbar {
+  & a {
+    color: #cfe0c3;
+    text-shadow: 1px 1px #1f363d;
+
+    &:hover {
+      color: white;
+    }
+    &.active {
+      color: #9ec1a3;
+
+      &:hover {
+        color: #70a9a1;
+      }
+    }
+    &:active,
+    &.active:active {
+      color: #1f363d;
+    }
+  }
+}

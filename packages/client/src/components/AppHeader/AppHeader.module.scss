@@ -1,0 +1,47 @@
+.appHeader {
+  background: linear-gradient(
+    to right,
+    #1f363d,
+    #40798c,
+    #70a9a1,
+    #cfe0c3,
+    #cfe0c3
+  );
+  border-bottom: 2px solid grey;
+  max-width: 100vw;
+  width: 100%;
+
+  .headerContent {
+    padding: 10px;
+
+    .logoSearch {
+      display: flex;
+      flex-wrap: nowrap;
+      max-height: 40px;
+
+      & .title {
+        color: white;
+        padding: 0 15px 0 5px;
+        height: 81px;
+        margin: auto 5px;
+        text-shadow: 1px 1px #1f363d;
+      }
+
+      & .logo {
+        border: 1px solid #cfe0c36d;
+        border-radius: 100%;
+        filter: hue-rotate(40deg);
+        max-width: 40px;
+        -webkit-filter: hue-rotate(40deg);
+      }
+
+      & .searchBar {
+        display: contents;
+
+        & input {
+          border: 1px solid black;
+        }
+      }
+    }
+  }
+}

@@ -14,6 +14,9 @@ export default async function fetchParks(apiKey) {
       }
     );
     const json = await response.json();
+    json.name = json.fullName;
+    delete json.fullName;
+
     return json;
   } catch (error) {
     console.log(`Sorry, unable to fetch parks because ${error}`);

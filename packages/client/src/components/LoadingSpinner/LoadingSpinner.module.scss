@@ -1,0 +1,16 @@
+@import "../../styles/_spinner.scss";
+@import "../../styles/_colors.scss";
+
+.container {
+  position: fixed;
+  width: 100%;
+  & .spinner {
+    animation: spinner 1.5s linear infinite;
+    border: 5px solid darken($lightOlive43, 5);
+    border-radius: 50%;
+    border-top: 5px solid lighten($darkCyan, 20);
+    height: 50px;
+    margin: 20px auto 0;
+    width: 50px;
+  }
+}

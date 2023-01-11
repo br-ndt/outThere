@@ -1,15 +1,15 @@
+@import "../../styles/_colors.scss";
+@import "../../styles/_gradients.scss";
+
 .appHeader {
-  background: linear-gradient(
-    to right,
-    #1f363d,
-    #40798c,
-    #70a9a1,
-    #cfe0c3,
-    #cfe0c3
-  );
-  border-bottom: 2px solid grey;
+  background: $hori-gradient;
+  box-shadow: 2px 2px 4px 4px $black25;
+  height: 80px;
   max-width: 100vw;
+  position: fixed;
+  top: 0;
   width: 100%;
+  z-index: 1;
 
   .headerContent {
     padding: 10px;
@@ -24,11 +24,11 @@
         padding: 0 15px 0 5px;
         height: 81px;
         margin: auto 5px;
-        text-shadow: 1px 1px #1f363d;
+        text-shadow: 1px 1px $darkCyan;
       }
 
       & .logo {
-        border: 1px solid #cfe0c36d;
+        border: 1px solid $lightOlive43;
         border-radius: 100%;
         filter: hue-rotate(40deg);
         max-width: 40px;

@@ -1,11 +1,14 @@
 export { default as AppHeader } from "./AppHeader/AppHeader";
-export { default as Card } from "./Card/Card";
+export { AttractionCard, Card } from "./Card";
 export { default as CurrentWeather } from "./CurrentWeather/CurrentWeather";
 export { default as DayOfWeek } from "./DayOfWeek/DayOfWeek";
 export { default as HourOfDay } from "./HourOfDay/HourOfDay";
 export { default as LineChart } from "./LineChart/LineChart";
+export { default as LoadingSpinner } from "./LoadingSpinner/LoadingSpinner";
 export { default as NavBar } from "./NavBar/NavBar";
 export { default as Nearby } from "./Nearby/Nearby";
+export { default as ServerError } from "./ServerError/ServerError";
+export { default as TimingRoutes } from "./TimingRoutes/TimingRoutes";
 export { default as TodayWeather } from "./TodayWeather/TodayWeather";
 export { default as WeatherButton } from "./WeatherButton/WeatherButton";
 export { default as WeeklyWeather } from "./WeeklyWeather/WeeklyWeather";

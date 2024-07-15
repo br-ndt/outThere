@@ -208,7 +208,7 @@ export default function LineChart({
       tooltip.transition().duration(100).style("opacity", 0.9);
       tooltip
         .style("left", `${xScale(d0.index)}px`)
-        .style("top", `${yScale(d0.value) - 128}px`);
+        .style("top", `${yScale(d0.value) - 64}px`);
       tooltipText.html(d0.tooltipContent || d0.label);
     }
   }

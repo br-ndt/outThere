@@ -9,7 +9,6 @@
   margin: 10px;
   min-width: 160px;
   max-width: 300px;
-  overflow-x: scroll;
   padding: 10px;
   text-align: center;
 
@@ -19,5 +18,9 @@
 
   & img {
     border-radius: 20px;
+  }
+
+  &.scroll {
+    overflow-x: scroll;
   }
 }

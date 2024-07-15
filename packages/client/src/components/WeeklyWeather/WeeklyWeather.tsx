@@ -2,7 +2,7 @@ import React from "react";
 
 import { DayOfWeek } from "..";
 
-import { DailyWeather } from "../../types/weatherData";
+import { DailyWeather } from "../../types/WeatherData";
 
 import styles from "./WeeklyWeather.module.scss";
 

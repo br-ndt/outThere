@@ -5,6 +5,7 @@ export { default as DayOfWeek } from "./DayOfWeek/DayOfWeek";
 export { default as HourOfDay } from "./HourOfDay/HourOfDay";
 export { default as LineChart } from "./LineChart/LineChart";
 export { default as LoadingSpinner } from "./LoadingSpinner/LoadingSpinner";
+export { default as LocationSearch } from "./LocationSearch/LocationSearch";
 export { default as NavBar } from "./NavBar/NavBar";
 export { default as Nearby } from "./Nearby/Nearby";
 export { default as ServerError } from "./ServerError/ServerError";

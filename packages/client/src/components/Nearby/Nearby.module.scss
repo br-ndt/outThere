@@ -1,0 +1,29 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  & a {
+    color: black;
+    text-shadow: 1px 1px transparent;
+
+    &:hover {
+      color: white;
+    }
+    &.active {
+      color: #9ec1a3;
+
+      &:hover {
+        color: #70a9a1;
+      }
+    }
+    &:active,
+    &.active:active {
+      color: #1f363d;
+    }
+  }
+}
+
+h2 {
+  text-align: center;
+}

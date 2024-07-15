@@ -1,1 +1,9 @@
 @import "../../../styles/_card.scss";
+
+.card {
+  max-height: 600px;
+  overflow-y: scroll;
+  .bullets {
+    text-align: left;
+  }
+}

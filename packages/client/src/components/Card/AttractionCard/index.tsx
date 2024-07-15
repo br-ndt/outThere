@@ -12,11 +12,19 @@ export default function AttractionCard({ attraction }: AttractionProps) {
     <Card className={styles.card} key={attraction.name}>
       <img style={{ height: "200px" }} src={attraction.images[0].url} />
       <div>
-        <h3>{attraction.name}</h3>
+        {attraction.url ? (
+          <a href={attraction.url} target="_blank" rel="noreferrer">
+            <h3>{attraction.name}</h3>
+          </a>
+        ) : (
+          <h3>{attraction.name}</h3>
+        )}
         <p>{attraction.designation}</p>
-        <ul>
+        <ul className={styles.bullets}>
           {attraction.activities?.map((activity) => (
-            <li key={`${attraction.name}-${activity.name}-${activity.id}`}>{activity.name}</li>
+            <li key={`${attraction.name}-${activity.name}-${activity.id}`}>
+              {activity.name}
+            </li>
           ))}
         </ul>
         <p>{`${attraction.addresses[0].line1}, ${attraction.addresses[0].city}, ${attraction.addresses[0].stateCode}`}</p>

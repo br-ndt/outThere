@@ -31,20 +31,24 @@ apiRouter.get("/parks", async (req, res) => {
 apiRouter.post("/location", async (req, res) => {
   if (req.body) {
     console.log(
-      `Received /weather post with body... ${req.body.lat}, ${req.body.lon}`
+      `Received /location post with body... ${req.body.lat}, ${req.body.lon}`
     );
     if (areCoordinatesValid(req.body.lat, req.body.lon) && checkIfFetch()) {
+      console.log("fetching weather...");
       const weather = await fetchWeather(
         process.env.OPEN_WEATHER_API_KEY,
         req.body.lat,
         req.body.lon
-      );
+        );
+      console.log("fetching city...");
       const cityNames = await fetchCity(
         process.env.OPEN_WEATHER_API_KEY,
         req.body.lat,
         req.body.lon
       );
+      console.log("fetching campgrounds...");
       const campgrounds = await fetchCampgrounds(process.env.NPS_API_KEY);
+      console.log("fetching parksa...");
       const parks = await fetchParks(process.env.NPS_API_KEY);
       res.status(200).send(LocationSerializer.Details(weather, cityNames[0], campgrounds.data, parks.data));
     } else {

@@ -2,7 +2,7 @@ import getDistanceFromCoords from "../helpers/haversineFormulae.js";
 
 export default class LocationSerializer {
   static Details(weather, city, campgrounds, parks) {
-    return {
+        return {
       campgrounds: this.RangeFilterAndSort(campgrounds, city.lat, city.lon),
       city: {
         ...city,

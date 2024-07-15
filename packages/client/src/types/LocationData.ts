@@ -14,6 +14,7 @@ export type CityInfo = {
 
 export type Attraction = {
   name: string;
+  url: string;
   images: {
     url: string;
   }[];
